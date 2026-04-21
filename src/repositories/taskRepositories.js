@@ -5,18 +5,18 @@ exports.findAll = async () => {
   return result.rows;
 };
 
-exports.create = async ({ title }) => {
+exports.create = async ({ title, date }) => {
   const result = await db.query(
-    "INSERT INTO tasks (title) VALUES ($1) RETURNING *",
-    [title],
+    "INSERT INTO tasks (title, date, completed) VALUES ($1, $2, $3) RETURNING *",
+    [title, date, false],
   );
   return result.rows[0];
 };
 
 exports.update = async (id, data) => {
   const result = await db.query(
-    "UPDATE tasks SET title = $1, completed = $2 WHERE id = $3 RETURNING *",
-    [data.title, data.completed, id],
+    "UPDATE tasks SET title = $1, date = $2, completed = $3 WHERE id = $4 RETURNING *",
+    [data.title, data.date, data.completed, id],
   );
   return result.rows[0];
 };

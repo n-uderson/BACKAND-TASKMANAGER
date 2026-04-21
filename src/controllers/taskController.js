@@ -6,21 +6,21 @@ exports.list = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const { title } = req.body;
+  const { title, date } = req.body;
 
-  if (!title) {
-    return res.status(400).json({ error: "Titulo é obrigatório" });
+  if (!title || !date) {
+    return res.status(400).json({ error: "Titulo e data são obrigatórios" });
   }
 
-  const task = await taskRepository.create({ title });
+  const task = await taskRepository.create({ title, date });
   res.status(201).json(task);
 };
 
 exports.update = async (req, res) => {
   const { id } = req.params;
-  const { title, completed } = req.body;
+  const { title, date, completed } = req.body;
 
-  const task = await taskRepository.update(id, { title, completed });
+  const task = await taskRepository.update(id, { title, date, completed });
 
   if (!task) {
     return res.status(404).json({ error: "Tarefa não encontrada" });
