@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
   const task = await taskRepository.create({
     title,
     date,
-    user_Id: userId,
+    userId,
   });
   res.status(201).json(task);
 };
