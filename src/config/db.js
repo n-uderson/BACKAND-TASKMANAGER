@@ -1,6 +1,9 @@
 const { Pool } = require("pg");
 
+console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
 const isProduction = process.env.DATABASE_URL;
+
 
 const pool = new Pool(
   isProduction
